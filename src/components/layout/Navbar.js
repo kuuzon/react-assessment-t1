@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 class Navbar extends Component {
     static defaultProps = {
         title: 'Pokemon finder',
-        icon: 'fas    fa-bolt'
+        icon: 'fas fa-bolt'
     };
 
     static propTypes = {
