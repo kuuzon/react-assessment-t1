@@ -5,23 +5,37 @@ import Axios from 'axios';
 //Local Component Modules
 import './App.css';
 import Navbar from './components/layout/Navbar';
-import Users from './components/users/Users';
+import Pokemon from './components/resources/Pokemon';
 
 class App extends Component {
-  
+
   //Defining Default States
   state = {
-    users: [],
+    pokemons: [],
     loading: false
   };
 
-  //FUNCTION: Access HTTP API / RESTful API web services (using Axios methods)
-  async componentDidMount(){
+  //FUNCTION: Access & fetch RESTful API data
+  async componentDidMount() {
     this.setState({ loading:true });
-    const res = await Axios.get(`https://api.github.com/users?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`);      //Change to PokeAPI once front end modules working
-    this.setState({ users:res.data, loading:false });
-    console.log(res.data)
+
+    const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151`);
+    this.setState({ pokemons: res.data.results, loading: false });
+    console.log(res.data.results);
   };
+
+
+  //LATER FUNCTION (if time): TRY-CATCH for API fetch
+  //   try {
+  //     const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151`);
+  //     this.setState({ data: res.data, loading: false })
+  //     console.log(res.data);
+  //   } catch(err) {
+  //     console.log("The API data cannot be fetched");
+  //     this.setState({ loading: false });
+  //     throw err
+  //   }
+  // }
 
   //Render to the DOM
   render(){
@@ -29,7 +43,7 @@ class App extends Component {
       <div className = "App">
         <Navbar />
         <div className = "container">
-          <Users loading = {this.state.loading} users = {this.state.users}/>
+          <Pokemon loading = {this.state.loading} pokemons = {this.state.pokemons} />  
         </div>
       </div>
     );
