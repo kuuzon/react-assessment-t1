@@ -12,30 +12,27 @@ class App extends Component {
   //Defining Default States
   state = {
     pokemons: [],
-    loading: false
+    pokeDetails: [],
+    loading: false,
   };
 
-  //FUNCTION: Access & fetch RESTful API data
+  //FUNCTION: Access & fetch RESTful API data and pass into states
   async componentDidMount() {
     this.setState({ loading:true });
 
-    const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151`);
-    this.setState({ pokemons: res.data.results, loading: false });
-    console.log(res.data.results);
+    try {
+      const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151`);
+      this.setState({ pokemons: res.data.results, loading: false });
+      console.log(res.data.results);
+    } catch(err) {
+      console.log("The API data cannot be fetched");
+      this.setState({ loading: false });
+      throw err
+    }
+
+    // const x = await Axios.get(this.state.pokemons.url);   //HELP: Writing 2nd Axios.get to fetch nested API array
+    // this.setState({ pokeDetails: x})
   };
-
-
-  //LATER FUNCTION (if time): TRY-CATCH for API fetch
-  //   try {
-  //     const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151`);
-  //     this.setState({ data: res.data, loading: false })
-  //     console.log(res.data);
-  //   } catch(err) {
-  //     console.log("The API data cannot be fetched");
-  //     this.setState({ loading: false });
-  //     throw err
-  //   }
-  // }
 
   //Render to the DOM
   render(){
@@ -51,3 +48,10 @@ class App extends Component {
 }
 
 export default App;
+
+
+//To Complete: (1) Search functionaility, (2) individual pokemon profile pages & (3) Static Abous Us
+
+//To Expand: (1) Add 2nd fetch to obtain further pokemon data from API, (2) Fetch image urls dynamically for pokemon profile pages (`https://pokeres.bastionbot.org/images/pokemon/${this.state.pokemons.id}.png`)
+
+//To Adjust (if time): (1) Apply Hooks into the project and convert
