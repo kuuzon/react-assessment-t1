@@ -6,6 +6,8 @@ import Axios from 'axios';
 import './App.css';
 import Navbar from './components/layout/Navbar';
 import Pokemon from './components/resources/Pokemon';
+import Search from './components/resources/Search';
+import Alert from './components/layout/Alert';
 
 class App extends Component {
 
@@ -14,6 +16,8 @@ class App extends Component {
     pokemons: [],
     pokeDetails: [],
     loading: false,
+    msg: '',
+    type: '',
   };
 
   //FUNCTION: Access & fetch RESTful API data and pass into states
@@ -33,14 +37,33 @@ class App extends Component {
     // const x = await Axios.get(this.state.pokemons.url);   //HELP: Writing 2nd Axios.get to fetch nested API array
     // this.setState({ pokeDetails: x})
   };
+  //FUNCTIONS: Search, clear & alerts(for failed search)
+  searchPokemon = async (text) => {
+    this.setState({ loading: true });
+    const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${text}/`);
+    this.setState({pokemons:res.data, loading: false});     //Maybe res.data.items later
+    console.log(this.state.pokemons)
+  };
+
+  clearPokemon = () => {
+    this.setState({ pokemons: [], loading: false });
+  };
+
+  setAlert = (msgfromsearch, typefromsearch) => {
+    this.setState({ msg: msgfromsearch, type: typefromsearch});
+    setTimeout(() => this, this.setState({ msg: '', type: '' }), 5000);
+  };
 
   //Render to the DOM
   render(){
+    const {loading, pokemons} = this.state
     return(
       <div className = "App">
         <Navbar />
         <div className = "container">
-          <Pokemon loading = {this.state.loading} pokemons = {this.state.pokemons} />  
+          <Alert msg={this.state.msg} type={this.state.type} />
+          <Search searchPokemon = {this.searchPokemon} clearPokemon={this.clearPokemon} showClear={pokemons.length>0?true:false} setAlert={this.setAlert} />
+          <Pokemon loading = {loading} pokemons = {pokemons} />  
         </div>
       </div>
     );
