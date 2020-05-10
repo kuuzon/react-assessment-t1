@@ -14,7 +14,7 @@ class App extends Component {
   //Defining Default States
   state = {
     pokemons: [],
-    pokeDetails: [],
+    //pokeDetails: [],
     loading: false,
     msg: '',
     type: '',
@@ -25,7 +25,7 @@ class App extends Component {
     this.setState({ loading:true });
 
     try {
-      const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon?limit=151`);
+      const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon?limit=964`);
       this.setState({ pokemons: res.data.results, loading: false });
       console.log(res.data.results);
     } catch(err) {
