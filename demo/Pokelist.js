@@ -1,10 +1,12 @@
 // I AM THE LIST COMPONENT... yo
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 export const useFetchOnDemand = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  
   const fetchData = async (url, options) => {
     setData(null);
     setError(null);
@@ -22,6 +24,7 @@ export const useFetchOnDemand = () => {
   };
   return [fetchData, { loading, error, data }];
 };
+
 const ListItem = ({ item }) => (
   <Link to={`/pokemon/${item.name}`}>
     <div
@@ -35,11 +38,14 @@ const ListItem = ({ item }) => (
     </div>
   </Link>
 );
+
 const API_URL = "https://pokeapi.co/api/v2/pokemon";
+
 function PokemonList() {
   const [offset, setOffset] = useState(0);
   const [fetchData, { loading, error, data }] = useFetchOnDemand();
   const queryParams = `?offset=${offset}&limit=10`;
+  
   const getPokemon = () => fetchData(API_URL + queryParams, {});
   useEffect(() => {
     console.log("getting...");
@@ -63,6 +69,7 @@ function PokemonList() {
     console.log(data);
     // destructuring some stuff out of the data we got back from the API
     const { count, results, next, previous } = data;
+    
     return (
       <div>
         <div>

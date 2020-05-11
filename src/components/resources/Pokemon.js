@@ -10,7 +10,7 @@ const Pokemon = ({ pokemons, loading }) => {
         return (
             <div style = { pokeStyle }>
                 {pokemons.map(pokemon => (           //Iterate through the JSON data 
-                    <Pokemonitem key = {pokemon.id} pokemon = {pokemon} />
+                    <Pokemonitem key = {pokemon.name} pokemon = {pokemon} />
                 ))}
             </div>
         )

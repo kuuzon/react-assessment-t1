@@ -1,48 +1,44 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
-class Search extends Component {
-    state = {
-        text: '',
-        type: '',
-        height: '',
-        weight: '',
+
+const Search = ({ setAlert, searchPokemon, showClear, clearPokemon }) => {
+    
+    //DEFINE STATE (Hooks):
+    const [text, setText] = useState('');
+
+    const onChange = (e) => {                 //"e" can also refer to a react synthetic "event"
+        setText(e.target.value);
     };
 
-    static propTypes = {
-        searchPokemon: PropTypes.func.isRequired,
-        clearPokemon: PropTypes.func.isRequired,
-        setAlert: PropTypes.func.isRequired,
-    };
-
-    onChange = (e) => {                 //"e" can also refer to a react synthetic "event"
-        this.setState({ [e.target.name]: e.target.value})
-    };
-
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();                 //preventDefault: Called to prevent a browser reload/refresh
-        if(this.state.text === ''){
-            this.props.setAlert('Please enter characters in the field', 'light')
+        if(text === ''){
+            setAlert('Please enter characters in the field', 'light')
         }else{
-            // console.log(this.state.text);
-            this.props.searchPokemon(this.state.text);
+            console.log(text);
+            searchPokemon(text);
         }
     };
 
-    render() {
-        const {showClear, clearPokemon} = this.props
-        return (
-            <div>
-                <form className="form" onSubmit={this.onSubmit}>
-                    <input type="text" name="text" placeholder="Search Pokemon..." value={this.state.text} onChange={this.onChange}/>
-                    <input type="submit" value="Search" className="btn btn-dark btn-block"/>
-                </form>
-                {showClear && (
-                    <button className="btn btn-light btn-block" onClick={clearPokemon}>Clear</button>
-                )}
-            </div>
-        )
-    };
+    // const {showClear, clearPokemon} = this.props;
+    return (
+        <div>
+            <form className="form" onSubmit={this.onSubmit}>
+                <input type="text" name="text" placeholder="Search Pokemon..." value={this.state.text} onChange={this.onChange}/>
+                <input type="submit" value="Search" className="btn btn-dark btn-block"/>
+            </form>
+            {showClear && (
+                <button className="btn btn-light btn-block" onClick={clearPokemon}>Clear</button>
+            )}
+        </div>
+    )
 }
+
+Search.propTypes = {
+    searchPokemon: PropTypes.func.isRequired,
+    clearPokemon: PropTypes.func.isRequired,
+    setAlert: PropTypes.func.isRequired,
+};
 
 export default Search

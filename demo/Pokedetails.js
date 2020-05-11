@@ -2,6 +2,7 @@
 import React from "react";
 import { useFetch } from "../hooks";
 import { useParams } from "react-router";
+
 export default function PokemonDetails(props) {
   const { pokemonSlug } = useParams();
   const { loading, error, data } = useFetch(

@@ -5,6 +5,7 @@ import Nav from "./components/Nav";
 import PokemonList from "./views/PokemonList";
 import PokemonDetails from "./views/PokemonDetails";
 import Search from "./views/Search";
+
 function App() {
   return (
     <div>

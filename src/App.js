@@ -1,6 +1,11 @@
 //Core imports & dependencies
-import React,{ Component } from 'react';
+import React,{ Component, Fragment } from 'react';
 import Axios from 'axios';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
+//Local Component Views
+import About from './components/views/About';
+import Pokedetails from '/components/views/Pokedetails';
 
 //Local Component Modules
 import './App.css';
@@ -9,12 +14,13 @@ import Pokemon from './components/resources/Pokemon';
 import Search from './components/resources/Search';
 import Alert from './components/layout/Alert';
 
+
 class App extends Component {
 
   //Defining Default States
   state = {
     pokemons: [],
-    //pokeDetails: [],
+    pokemondetails: {},
     loading: false,
     msg: '',
     type: '',
@@ -37,7 +43,7 @@ class App extends Component {
     // const x = await Axios.get(this.state.pokemons.url);   //HELP: Writing 2nd Axios.get to fetch nested API array
     // this.setState({ pokeDetails: x})
   };
-  //FUNCTIONS: Search, clear & alerts(for failed search)
+  //FUNCTIONS: Search, clear & alert for failed search
   searchPokemon = async (text) => {
     this.setState({ loading: true });
     const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${text}/`);
@@ -54,18 +60,44 @@ class App extends Component {
     setTimeout(() => this, this.setState({ msg: '', type: '' }), 5000);
   };
 
+  //FUNCTION: Get Pokedetails
+  getPokemon = async(pokemonSlug) => {
+    this.setState({loading:true});
+    const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonSlug}`);
+    this.setState({pokemondetails: res.data, loading: false});
+  }
+
   //Render to the DOM
   render(){
     const {loading, pokemons} = this.state
     return(
-      <div className = "App">
-        <Navbar />
-        <div className = "container">
-          <Alert msg={this.state.msg} type={this.state.type} />
-          <Search searchPokemon = {this.searchPokemon} clearPokemon={this.clearPokemon} showClear={pokemons.length>0?true:false} setAlert={this.setAlert} />
-          <Pokemon loading = {loading} pokemons = {pokemons} />  
+      <Router>
+        <div className = "App">
+          <Navbar />
+          <div className = "container">
+            <Alert msg={this.state.msg} type={this.state.type} />
+            <Switch>
+              
+              {/* ROUTE: Home w Search*/}
+              <Route exact path='/' render={props =>(
+                <Fragment>
+                  <Search searchPokemon = {this.searchPokemon} clearPokemon={this.clearPokemon} showClear={pokemons.length>0?true:false} setAlert={this.setAlert} />
+                  <Pokemon loading = {loading} pokemons = {pokemons} />  
+                </Fragment>
+              )} />
+
+              {/* ROUTE: AboutUs */}
+              <Route exact path='/about' component={About} />
+
+              {/* ROUTE: PokeDetails */}
+              <Route exact path='/pokemon/:pokemonSlug' render={props => (
+                <Pokedetails {...props} getPokemon={this.getPokemon} pokemondetails={this.state.pokemondetails} loading={loading} />
+              )} />
+
+            </Switch>
+          </div>
         </div>
-      </div>
+      </Router>
     );
   };
 }
@@ -73,7 +105,7 @@ class App extends Component {
 export default App;
 
 
-//To Complete: (1) Search functionaility, (2) individual pokemon profile pages & (3) Static Abous Us
+//To Complete: (1) Search functionaility, (2) individual pokemon profile pages 
 
 //To Expand: (1) Add 2nd fetch to obtain further pokemon data from API, (2) Fetch image urls dynamically for pokemon profile pages (`https://pokeres.bastionbot.org/images/pokemon/${this.state.pokemons.id}.png`)
 

@@ -1,9 +1,11 @@
 // I am the Search component yo
 import React, { useState } from "react";
+
 export const useFetchOnDemand = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  
   const fetchData = async (url, options) => {
     setData(null);
     setError(null);
@@ -21,15 +23,18 @@ export const useFetchOnDemand = () => {
   };
   return [fetchData, { loading, error, data }];
 };
+
 const Pokemon = ({ pokemon }) => (
   <div>
     <h3>{pokemon.name}</h3>
     <img src={pokemon.sprites.front_default} alt={`${pokemon.name} sprite`} />
   </div>
 );
+
 export default function Search(props) {
   const [searchString, setSearchString] = useState("");
   const [fetchData, { loading, error, data }] = useFetchOnDemand();
+  
   const handleClick = () => {
     fetchData(`https://pokeapi.co/api/v2/pokemon/${searchString}`, {});
   };
