@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
+import pokemonContext from '../../context/pokemon/pokemonContext';
 
+const Search = ({ setAlert }) => {
 
-const Search = ({ setAlert, searchPokemon, showClear, clearPokemon }) => {
+    const pokemoncontexts = useContext(pokemonContext);
     
     //DEFINE STATE (Hooks):
     const [text, setText] = useState('');
@@ -17,26 +19,24 @@ const Search = ({ setAlert, searchPokemon, showClear, clearPokemon }) => {
             setAlert('Please enter characters in the field', 'light')
         }else{
             console.log(text);
-            searchPokemon(text);
+            pokemoncontexts.searchPokemon(text);
         }
     };
 
-    // const {showClear, clearPokemon} = this.props;
     return (
         <div>
-            <form className="form" onSubmit={this.onSubmit}>
-                <input type="text" name="text" placeholder="Search Pokemon..." value={this.state.text} onChange={this.onChange}/>
+            <form className="form" onSubmit={onSubmit}>
+                <input type="text" name="text" placeholder="Search Pokemon..." value={text} onChange={onChange}/>
                 <input type="submit" value="Search" className="btn btn-dark btn-block"/>
             </form>
-            {showClear && (
-                <button className="btn btn-light btn-block" onClick={clearPokemon}>Clear</button>
+            {pokemoncontexts.pokemons.length>0?true:false && (
+                <button className="btn btn-light btn-block" onClick={pokemoncontexts.clearPokemon}>Clear</button>
             )}
         </div>
     )
 }
 
 Search.propTypes = {
-    searchPokemon: PropTypes.func.isRequired,
     clearPokemon: PropTypes.func.isRequired,
     setAlert: PropTypes.func.isRequired,
 };

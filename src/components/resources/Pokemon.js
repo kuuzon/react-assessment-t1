@@ -1,8 +1,13 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import Pokemonitem from './Pokemonitem'
 import Spinner from '../layout/Spinner'
+import pokemonContext from '../../context/pokemon/pokemonContext';
 
-const Pokemon = ({ pokemons, loading }) => {
+const Pokemon = () => {
+
+    const pokemoncontexts = useContext(pokemonContext);
+    
+    const { pokemons, loading } = pokemoncontexts;
 
     if(loading){
         return <Spinner />

@@ -12,10 +12,10 @@ const Pokemonitem = ({ pokemon: { name }}) => {
             </div>
         </div>
     )
-}
+};
 
 Pokemonitem.propTypes = {
     pokemon: PropTypes.object.isRequired
-}
+};
 
 export default Pokemonitem

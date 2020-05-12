@@ -1,41 +1,47 @@
-import React, {Component, Fragment} from 'react';
+import React, {Fragment, useEffect, useContext} from 'react';
 import {Link} from 'react-router-dom';
+import pokemonContext from '../../context/pokemon/pokemonContext';
 
-class Pokedetails extends Component {
-    componentDidMount(){
-        this.props.getPokemon(this.props.match.params.pokemonSlug)
-    }
+const Pokedetails = ({ match }) => {
+
+    const pokemoncontexts = useContext(pokemonContext);
+
+    const {pokemondetails, getPokemon} = pokemoncontexts;
     
-    render(){
-        const {name, types, height, weight, sprites} = this.props.pokemondetails;
-        return(
-            <Fragment>
-                <Link to="/" className="btn btn-light">Back to Search</Link>
-                <div className="card-grid-2">
+    useEffect(() => {
+        getPokemon(match.params.pokemonSlug);
+        console.log(match.params.pokemonSlug)
+    }, []);
 
-                    {/* 1st Column */}
-                    <div className="all-center">
-                        <h2>{name}</h2>
-                        {types &&(
-                            <Fragment>
-                                <h4>Types: </h4>
-                                <p>{types.type.name}</p>
-                            </Fragment>
-                        )}
-                        <img src={sprites.front_default} alt={`${name} sprite`} style={ pokeStyle } />
-                    </div>
-                
-                    {/* 2nd Column */}
-                    <div className="all-center">
-                        <h4>Height: </h4>
-                        <p>{height}</p>
-                        <h4>Weight: </h4>
-                        <p>{weight}</p>
-                    </div>
+    const {name, types, height, weight, sprites} = pokemondetails;
+    
+    return(
+        <Fragment>
+            <Link to="/" className="btn btn-light">Back to Search</Link>
+            <div className="card-grid-2">
+
+                {/* 1st Column */}
+                <div className="all-center">
+                    <h2>{name}</h2>
+                    {types &&(
+                        <Fragment>
+                            <h4>Types: </h4>
+                            <p>{types.type.name}</p>
+                        </Fragment>
+                    )}
+                    <img src={sprites.front_default} alt={`${name} sprite`} style={ pokeStyle } />
                 </div>
-            </Fragment>
-        )
-    }
+            
+                {/* 2nd Column */}
+                <div className="all-center">
+                    <h4>Height: </h4>
+                    <p>{height}</p>
+                    <h4>Weight: </h4>
+                    <p>{weight}</p>
+                </div>
+            </div>
+        </Fragment>
+    )
 }
 
 const pokeStyle = {
