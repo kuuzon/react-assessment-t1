@@ -21,11 +21,11 @@ const PokemonState = props => {
     const setLoading = () => dispatch({ type: SET_LOADING })
 
     //FUNCTION: Search PokeAPI for 964 top-level array (id, name & url)
-    const searchPokemon = async (text) => {
+    const searchPokemon = async () => {
         setLoading();
         
-        const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${text}/`);
-        
+        const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/?limit=964`);
+        //DATA IS COMING BACK AS JSON OBJECT {[]} NOT PURE ARRAY = CANNOT MAP IN POKEMON.JS - HOW TO CONVERT?
         dispatch({
             type: SEARCH_POKEMON,
             payload: res.data,
@@ -33,9 +33,9 @@ const PokemonState = props => {
     };
 
     //FUNCTION: Search PokeAPI for pokemon details second-level array (name, sprite, height, weight, etc.)
-    const getPokemon = async(pokemonSlug) => {
+    const getPokemon = async(name) => {
         setLoading();
-        const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonSlug}`);
+        const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
         dispatch({
             type: GET_POKEMON,
             payload: res.data,

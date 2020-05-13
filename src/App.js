@@ -16,7 +16,6 @@ import Alert from './components/layout/Alert';
 //Hook Modules
 import PokemonState from './context/pokemon/PokemonState'
 
-
 const App = () => {
 
   //Defining Default States
@@ -52,7 +51,7 @@ const App = () => {
             <Route exact path='/about' component={About} />
 
             {/* ROUTE: PokeDetails */}
-            <Route exact path='/pokemon/:pokemonSlug' render={props => (
+            <Route exact path='/pokemon/:name' render={props => (
               <Pokedetails {...props} />
             )} />
 

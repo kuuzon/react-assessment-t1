@@ -9,14 +9,18 @@ const Pokemon = () => {
     
     const { pokemons, loading } = pokemoncontexts;
 
+    console.log(pokemons);
+
     if(loading){
         return <Spinner />
     }else{
         return (
             <div style = { pokeStyle }>
+                
                 {pokemons.map(pokemon => (           //Iterate through the JSON data 
-                    <Pokemonitem key = {pokemon.name} pokemon = {pokemon} />
+                    <Pokemonitem key = {pokemon.id} pokemon = {pokemon} />
                 ))}
+
             </div>
         )
     }

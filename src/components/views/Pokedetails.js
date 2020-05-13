@@ -9,8 +9,8 @@ const Pokedetails = ({ match }) => {
     const {pokemondetails, getPokemon} = pokemoncontexts;
     
     useEffect(() => {
-        getPokemon(match.params.pokemonSlug);
-        console.log(match.params.pokemonSlug)
+        getPokemon(match.params.name);
+        console.log(match.params.name)
     }, []);
 
     const {name, types, height, weight, sprites} = pokemondetails;
