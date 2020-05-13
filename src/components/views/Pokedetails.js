@@ -4,8 +4,6 @@ import pokemonContext from '../../context/pokemon/pokemonContext';
 
 const Pokedetails = ({ match }) => {
 
-    
-
     const pokemoncontexts = useContext(pokemonContext);
     const {pokemondetails, getPokemon} = pokemoncontexts;
 
