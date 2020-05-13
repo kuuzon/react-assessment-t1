@@ -7,9 +7,7 @@ const Pokemon = () => {
 
     const pokemoncontexts = useContext(pokemonContext);
     
-    const { pokemons, loading } = pokemoncontexts;
-
-    console.log(pokemons);
+    const { pokemons, loading } = pokemoncontexts;  
 
     if(loading){
         return <Spinner />

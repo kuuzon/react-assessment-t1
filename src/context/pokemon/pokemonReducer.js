@@ -1,4 +1,4 @@
-import { SEARCH_POKEMON, GET_POKEMON, CLEAR_POKEMON, SET_LOADING } from '../types';
+import { SEARCH_POKEMON, LIST_POKEMON, GET_POKEMON, CLEAR_POKEMON, SET_LOADING } from '../types';
 
 export default (state, action) => {
     switch(action.type) {
@@ -9,6 +9,13 @@ export default (state, action) => {
             };
         
         case SEARCH_POKEMON:
+            return {
+                ...state,
+                pokemons: action.payload.filter,
+                loading: false,
+            };
+
+        case LIST_POKEMON:
             return {
                 ...state,
                 pokemons: action.payload,

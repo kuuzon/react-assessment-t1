@@ -1,4 +1,5 @@
 export const SEARCH_POKEMON = 'SEARCH_POKEMON';
+export const LIST_POKEMON = 'LIST_POKEMON';
 export const GET_POKEMON = 'GET_POKEMON';
 export const CLEAR_POKEMON = 'CLEAR_POKEMON';
 export const SET_LOADING = 'SET_LOADING';

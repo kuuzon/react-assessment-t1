@@ -18,8 +18,7 @@ const Search = ({ setAlert }) => {
         if(text === ''){
             setAlert('Please enter characters in the field', 'light')
         }else{
-            console.log(text);
-            pokemoncontexts.searchPokemon(text);
+            pokemoncontexts.listPokemon(text);
         }
     };
 
