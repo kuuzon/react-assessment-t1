@@ -46,7 +46,8 @@ const PokemonState = props => {
     //FUNCTION: Search PokeAPI for pokemon details second-level array (name, sprite, height, weight, etc.)
     const getPokemon = async(name) => {
         setLoading();
-        const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`);
+        const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
+        console.log(res)
         dispatch({
             type: GET_POKEMON,
             payload: res.data,

@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 //Local Component Views
 import About from './components/views/About';
-import Search from './components/views/About';
 import Pokedetails from './components/views/Pokedetails';
 
 //Local Component Modules
@@ -50,9 +49,6 @@ const App = () => {
 
             {/* ROUTE: AboutUs */}
             <Route exact path='/about' component={About} />
-
-            {/* ROUTE: PokeSearch */}
-            <Route exact path='/search' component={Search} />
 
             {/* ROUTE: PokeDetails */}
             <Route exact path='/pokemon/:name' render={props => (

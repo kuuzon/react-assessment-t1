@@ -9,6 +9,8 @@ const Pokemon = () => {
     
     const { pokemons, loading } = pokemoncontexts;  
 
+    console.log(pokemons);
+
     if(loading){
         return <Spinner />
     }else{
