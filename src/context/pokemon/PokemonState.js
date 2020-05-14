@@ -47,11 +47,11 @@ const PokemonState = props => {
     const getPokemon = async(name) => {
         setLoading();
         const res = await Axios.get(`https://pokeapi.co/api/v2/pokemon/${name}`)
-        console.log("test", res)
         dispatch({
             type: GET_POKEMON,
             payload: res.data,
         })
+        console.log("test", res.data)
     };
 
     //FUNCTION: Clear home page of pokemonlist

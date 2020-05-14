@@ -5,14 +5,19 @@ import pokemonContext from '../../context/pokemon/pokemonContext';
 const Pokedetails = ({ match }) => {
 
     const pokemoncontexts = useContext(pokemonContext);
-    console.log(pokemoncontexts)
+    // console.log(pokemoncontexts)
 
     const {pokemondetails, getPokemon} = pokemoncontexts;
 
-    useEffect(() => {
-        getPokemon(match.params.name);
-        // console.log(match.params.name)
-    }, []);
+    // useEffect(() => {
+    //     getPokemon(match.params.name);
+    //     // console.log(match.params.name)
+    // }, []);
+
+    //THE USE EFFECT HOOK IS NOT CALLING THE FUNCTION PROPERLY - WORKS IF I PULL IT OUTSIDE IT.  WHAT IS USEEFFECT DOING!?!??
+
+    getPokemon(match.params.name);
+    console.log(match.params.name);
 
     const {name, types, height, weight, sprites} = pokemondetails;
     // console.log(sprites);
