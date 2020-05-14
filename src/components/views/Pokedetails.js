@@ -5,14 +5,17 @@ import pokemonContext from '../../context/pokemon/pokemonContext';
 const Pokedetails = ({ match }) => {
 
     const pokemoncontexts = useContext(pokemonContext);
+    console.log(pokemoncontexts)
+
     const {pokemondetails, getPokemon} = pokemoncontexts;
 
     useEffect(() => {
         getPokemon(match.params.name);
-        console.log(match.params.name)
+        // console.log(match.params.name)
     }, []);
 
     const {name, types, height, weight, sprites} = pokemondetails;
+    // console.log(sprites);
     
     return(
         <Fragment>

@@ -9,7 +9,7 @@ const Pokemon = () => {
     
     const { pokemons, loading } = pokemoncontexts;  
 
-    console.log(pokemons);
+    // console.log(pokemons);
 
     if(loading){
         return <Spinner />
