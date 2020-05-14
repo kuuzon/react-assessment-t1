@@ -12,11 +12,6 @@ const Pokedetails = ({ match }) => {
         getPokemon(match.params.name);
         // console.log(match.params.name);
     }, []);
-    
-    if (loading) {
-        console.log({ loading });
-        return "loading...";
-    }
 
     const {pokemondetails} = pokemoncontexts;
 
