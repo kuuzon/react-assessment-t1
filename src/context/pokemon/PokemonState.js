@@ -11,7 +11,7 @@ const PokemonState = props => {
         loading: false,
         msg: '',
         type: '',
-        pokemondetails: {},
+        pokemondetails: undefined,
     };
 
     const [state, dispatch] = useReducer(pokemonReducer, initialState);
