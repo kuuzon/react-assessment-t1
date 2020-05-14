@@ -4,13 +4,19 @@ import {
     GET_POKEMON, 
     CLEAR_POKEMON, 
     SET_LOADING 
-} from '../types';
+} from '../actions/types';
 
-export default function (state, action){
-    console.log({state, action})
+const initialState = {
+    pokemons: [],
+    loading: false,
+    msg: '',
+    type: '',
+    pokemondetails: {},
+    error: {},
+};
 
+export default function (state = initialState, action){
     const { type, payload } = action;
-    console.log({type, payload})
 
     switch(type) {
         case SET_LOADING:

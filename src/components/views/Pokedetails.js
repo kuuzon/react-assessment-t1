@@ -3,24 +3,46 @@ import {Link} from 'react-router-dom';
 import pokemonContext from '../../context/pokemon/pokemonContext';
 
 const Pokedetails = ({ match }) => {
-
+    
     const pokemoncontexts = useContext(pokemonContext);
     // console.log(pokemoncontexts)
 
-    const {pokemondetails, getPokemon} = pokemoncontexts;
+    const { getPokemon, loading} = pokemoncontexts;
+
+    useEffect(() => {
+        getPokemon(match.params.name);
+        console.log(match.params.name)
+    }, [])
+
+
+    //BUG TESTING: PERSISTENT BUG CANNOT SOLVE//
+
+    // console.log(getPokemon);
 
     // useEffect(() => {
-    //     getPokemon(match.params.name);
-    //     // console.log(match.params.name)
-    // }, []);
+    //     async function fetchData() {
+    //       // You can await here
+    //       await getPokemon(match.params.name); 
+    //       // ...
+    //     }
+    //     fetchData();
+    //   }, []); 
 
-    //THE USE EFFECT HOOK IS NOT CALLING THE FUNCTION PROPERLY - WORKS IF I PULL IT OUTSIDE IT.  WHAT IS USEEFFECT DOING!?!??
+    // useEffect(() => {
+    // }, [getPokemon, match]);
 
-    getPokemon(match.params.name);
-    console.log(match.params.name);
+    // getPokemon(match.params.name)
+    // console.log(match.params.name)
+
+    if(loading){
+        console.log({loading})
+        return 'loading...'
+    }
+
+    const {pokemondetails} = pokemoncontexts;
+    console.log(pokemondetails);
 
     const {name, types, height, weight, sprites} = pokemondetails;
-    // console.log(sprites);
     
     return(
         <Fragment>
@@ -57,10 +79,6 @@ const pokeStyle = {
 }
 
 export default Pokedetails
-
-
-
-
 
 
 

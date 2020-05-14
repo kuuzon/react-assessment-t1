@@ -15,13 +15,16 @@ import Alert from './components/layout/Alert';
 
 //Hook Modules
 import PokemonState from './context/pokemon/PokemonState'
+import pokemonContext from './context/pokemon/pokemonContext';
 
 const App = () => {
 
   //Defining Default States
   const[msg, setMsg] = useState('');
   const[type, setType] = useState('');
- 
+
+  const state = PokemonState();
+
   //FUNCTION: Alert for when search fields completed incorrectly
   const setAlert = (msgfromsearch, typefromsearch) => {
     setMsg(msgfromsearch);
@@ -31,7 +34,7 @@ const App = () => {
 
   //Render to the DOM
   return(
-    <PokemonState>
+    <pokemonContext.Provider value={state}>
       <Router>
       <div className = "App">
         <Navbar />
@@ -53,19 +56,14 @@ const App = () => {
             {/* ROUTE: PokeDetails */}
             <Route exact path='/pokemon/:name' render={props => (
               <Pokedetails {...props} />
-            )} />
+              )} />
 
           </Switch>
         </div>
       </div>
     </Router>
-    </PokemonState>
+  </pokemonContext.Provider>
   );
 }
 
 export default App;
-
-
-//To Debug: (1) API fetch requests
-
-//To Expand: (1) Add 2nd fetch to obtain further pokemon data from API, (2) Fetch image urls dynamically for pokemon profile pages (`https://pokeres.bastionbot.org/images/pokemon/${this.state.pokemons.id}.png`)
