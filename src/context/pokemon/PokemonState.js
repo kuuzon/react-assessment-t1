@@ -40,7 +40,7 @@ const PokemonState = props => {
             type: GET_POKEMON,
             payload: res.data,
         })
-        console.log("Fetch test", res.data)
+        // console.log("Fetch test", res.data)
     };
 
     //FUNCTION: Clear home page of pokemonlist

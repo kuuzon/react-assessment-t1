@@ -14,12 +14,12 @@ const Pokedetails = ({ match }) => {
     }, []);
 
     const {pokemondetails} = pokemoncontexts;
+    // console.log(pokemondetails);
 
     //Forced component load initialisation via pokemondetails: undefined
     if (pokemondetails) {
-        // console.log(pokemondetails);
 
-        const { name, types, height, weight, sprites } = pokemondetails;
+        const { name, height, weight, sprites } = pokemondetails;
     
         return (
             <Fragment>

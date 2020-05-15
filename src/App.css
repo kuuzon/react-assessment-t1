@@ -418,3 +418,10 @@ table th {
     justify-content: center;
   }
 }
+
+/* Error page */
+.errorimage {
+  height: 20rem;
+  width: 20rem;
+  padding: 1rem;
+}

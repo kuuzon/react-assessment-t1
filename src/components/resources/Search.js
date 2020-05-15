@@ -26,7 +26,7 @@ const Search = ({ setAlert }) => {
         <div>
             <form className="form" onSubmit={onSubmit}>
                 <input type="text" name="text" placeholder="Search Pokemon..." value={text} onChange={onChange}/>
-                <input type="submit" value="Search" className="btn btn-dark btn-block"/>
+                <input type="submit" value="Fetch Pokemon" className="btn btn-dark btn-block"/>
             </form>
             {pokemoncontexts.pokemons.length>0 && (
                 <button className="btn btn-light btn-block" onClick={pokemoncontexts.clearPokemon}>Clear</button>

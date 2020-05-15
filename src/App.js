@@ -12,6 +12,7 @@ import Navbar from './components/layout/Navbar';
 import Pokemon from './components/resources/Pokemon';
 import Search from './components/resources/Search';
 import Alert from './components/layout/Alert';
+import PathNotFound from './components/views/PathNotFound'
 
 //Hook Modules
 import PokemonState from './context/pokemon/PokemonState'
@@ -57,6 +58,9 @@ const App = () => {
             <Route exact path='/pokemon/:name' render={props => (
               <Pokedetails {...props} />
               )} />
+
+            {/* ROUTE: Not found - error */}
+            <Route component = { PathNotFound }></Route>
 
           </Switch>
         </div>
